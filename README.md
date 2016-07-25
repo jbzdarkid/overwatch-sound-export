@@ -31,9 +31,8 @@ This project runs on Python 2.7.
 Grab it from here: https://www.python.org/downloads/
 
 ### 4. Extract CASC
-* Use the casc tool to open (OPEN STORAGE) Overwatch\data\casc\config\52\6a\ whatever files is in there.
-* In the casc folder structure, select the folder "unknown".
-* Extract the whole unknown folder to projectfolder/casc
+* Launch CascView.exe, select Open Storage -> Program Files/Overwatch.
+* Extract the "unknown" folder to this repo, in the /casc folder.
 
 ### 5. Run Python script.
 Run the main script.
