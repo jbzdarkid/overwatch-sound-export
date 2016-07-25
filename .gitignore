@@ -1,3 +1,3 @@
 casc/unknown/*
-exported/**.ogg
+exported/**/*.ogg
 tools/*
