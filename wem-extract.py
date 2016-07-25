@@ -31,12 +31,12 @@ for dir in os.listdir(folder):
             # Ignore if first line doesn't contain wave headers
             if "WAVEfmt" not in f.readline()[:20]:
                 continue
-            if os.stat(path).st_size < 10 * 1024:
-                continue
             # show some progress
             if counter % 100 == 0:
                 print counter
             counter = counter + 1
+            if os.stat(path).st_size < 10 * 1024:
+                continue
             # convert to ogg
             FNULL = open(os.devnull, 'w')
             subprocess.call(config["paths"]["tools"]+'ww2ogg.exe '+path+' --pcb '+config["paths"]["tools"]+'packed_codebooks_aoTuV_603.bin', stdout=FNULL, stderr=subprocess.STDOUT)
