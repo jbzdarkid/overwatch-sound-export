@@ -1,6 +1,6 @@
 import os, subprocess, shutil, hashlib, csv, pprint, sys, json
 
-print "Overwatch wem extractor v0.2"
+print "Overwatch wem extractor v0.3"
 # get config
 with open('config.json') as data_file:
 	config = json.load(data_file)
@@ -13,11 +13,41 @@ with open(config["paths"]["important"], 'r') as csvfile:
 	for row in hashreader:
 		hashStorage[row[0]] = row[1]
 with open(config["paths"]["noise"], 'r') as csvfile:
-	hashreader = csv.reader(csvfile, delimiter=',')
-	for row in hashreader:
-		hashStorage[row[0]] = row[1]
-# clear unknowns file
-open(config["paths"]["unknowns"], 'a').truncate()
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for row in hashreader:
+        hashStorage[row[0]] = row[1]
+
+def categorize_unknown(hash, file):
+    os.system(file.replace("/", "\\")) # Windows equivalent of 'open', i.e. will start playing
+    while 1:
+        code = raw_input()
+        if code == "?":
+            print "n - Categorize as noise"
+            print "r - Re-listen"
+            print "s - Skip"
+            print "? - Print this help"
+            print "x - Exit"
+            print "Any other value - Categorize with value as path"
+            continue
+        elif code.lower() == "s":
+            return
+        elif code.lower() == "r":
+            os.system(file.replace("/", "\\"))
+            continue
+        elif code.lower() == "x":
+            sys.exit(0)
+        elif code.lower() == "n":
+            log = open(config["paths"]["noise"], 'a')
+            log.write(hash + ',' + file.replace(config["paths"]["exported"], "") + "\n")
+            log.close()
+            break
+        else:
+            if not code.endswith("/"):
+                code = code + "/"
+            log = open(config["paths"]["important"], 'a')
+            log.write(hash + ',' + file.replace(config["paths"]["exported"], code) + "\n")
+            log.close()
+            break
 
 folder = config["paths"]["casc"]
 # run through the casc folder
@@ -53,9 +83,4 @@ for dir in os.listdir(folder):
                     shutil.move(temp_path, config["paths"]["exported"]+hashStorage[hash])
                 else:
                     # add hash to the unknowns list
-                    unknown = unknown + 1
-                    if(not config["full_extract"] and unknown == 1000):
-                        sys.exit("1k unknowns listed. Please proceed to categorize. Ty! <3")
-                    log = open(config["paths"]["unknowns"], 'a')
-                    log.write(hash + ',' + temp_path.replace(config["paths"]["exported"], "") + "\n")
-                    log.close()
+                    categorize_unknown(hash, temp_path)
