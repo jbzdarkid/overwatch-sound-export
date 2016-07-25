@@ -7,7 +7,7 @@ with open('config.json') as data_file:
 counter = 1
 unknown = 0
 # get hash storage
-hashStorage = dict([])
+hashStorage = {}
 with open(config["paths"]["important"], 'r') as csvfile:
 	hashreader = csv.reader(csvfile, delimiter=',')
 	for row in hashreader:
@@ -31,6 +31,8 @@ for dir in os.listdir(folder):
             # Ignore if first line doesn't contain wave headers
             if "WAVEfmt" not in f.readline()[:20]:
                 continue
+            if os.stat(path).st_size < 10 * 1024:
+                continue
             # show some progress
             if counter % 100 == 0:
                 print counter
@@ -45,7 +47,7 @@ for dir in os.listdir(folder):
                 # fix ogg
                 subprocess.call(config["paths"]["tools"]+'revorb.exe '+temp_path, stdout=FNULL, stderr=subprocess.STDOUT)
                 # check against hash storage
-                hash = hashlib.md5(temp_path).hexdigest()
+                hash = hashlib.md5(f.read()).hexdigest()
                 if hash in hashStorage:
                     # move to a nice folder
                     shutil.move(temp_path, config["paths"]["exported"]+hashStorage[hash])
