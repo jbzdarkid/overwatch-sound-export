@@ -3,25 +3,32 @@ import os, subprocess, shutil, hashlib, csv, pprint, sys, json
 print "Overwatch wem extractor v0.3"
 # get config
 with open('config.json') as data_file:
-	config = json.load(data_file)
+    config = json.load(data_file)
 counter = 1
 unknown = 0
 # get hash storage
 hashStorage = {}
 with open(config["paths"]["important"], 'r') as csvfile:
-	hashreader = csv.reader(csvfile, delimiter=',')
-	for row in hashreader:
-		hashStorage[row[0]] = row[1]
-with open(config["paths"]["noise"], 'r') as csvfile:
     hashreader = csv.reader(csvfile, delimiter=',')
     for row in hashreader:
         hashStorage[row[0]] = row[1]
+with open(config["paths"]["noise"], 'r') as csvfile:
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for row in hashreader:
+        hashStorage[row[0]] = 'noise/'+row[1]
+
+def play(file):
+    file = file.replace("/", "\\") # Windows slashes
+    os.system(file) # Windows equivalent of 'open', i.e. will start playing
 
 def categorize_unknown(hash, file):
-    os.system(file.replace("/", "\\")) # Windows equivalent of 'open', i.e. will start playing
+    play(file)
     while 1:
-        code = raw_input()
-        if code == "?":
+        try:
+            code = raw_input()
+        except KeyboardInterrupt:
+            code = "x"
+        if code == "?" or code == "":
             print "n - Categorize as noise"
             print "r - Re-listen"
             print "s - Skip"
@@ -32,9 +39,10 @@ def categorize_unknown(hash, file):
         elif code.lower() == "s":
             return
         elif code.lower() == "r":
-            os.system(file.replace("/", "\\"))
+            play(file)
             continue
         elif code.lower() == "x":
+            os.remove(file)
             sys.exit(0)
         elif code.lower() == "n":
             log = open(config["paths"]["noise"], 'a')
@@ -52,8 +60,8 @@ def categorize_unknown(hash, file):
 folder = config["paths"]["casc"]
 # run through the casc folder
 for dir in os.listdir(folder):
-	for file in os.listdir(folder+'/'+dir):
-		# grab all the files
+    for file in os.listdir(folder+'/'+dir):
+        # grab all the files
         if not file.endswith(".xxx"):
             continue
         path = folder+'/'+dir+'/'+file
