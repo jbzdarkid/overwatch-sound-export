@@ -14,7 +14,7 @@ with open(config["paths"]["important"], 'r') as csvfile:
 with open(config["paths"]["noise"], 'r') as csvfile:
     hashreader = csv.reader(csvfile, delimiter=',')
     for row in hashreader:
-        hashStorage[row[0]] = 'noise/'+row[1]
+        hashStorage[row[0]] = 'noise/'
 
 def play(file):
     file = file.replace("/", "\\") # Windows slashes
@@ -45,14 +45,14 @@ def categorize_unknown(hash, file):
             sys.exit(0)
         elif code.lower() == "n":
             log = open(config["paths"]["noise"], 'a')
-            log.write(hash + ',' + file.replace(config["paths"]["exported"], "") + "\n")
+            log.write(hash + "\n")
             log.close()
             break
         else:
             if not code.endswith("/"):
                 code = code + "/"
             log = open(config["paths"]["important"], 'a')
-            log.write(hash + ',' + file.replace(config["paths"]["exported"], code) + "\n")
+            log.write(hash + ',' + code + "\n")
             log.close()
             break
 
@@ -64,31 +64,52 @@ for dir in os.listdir(folder):
         if not file.endswith(".xxx"):
             continue
         path = folder+'/'+dir+'/'+file
-        with open(path, 'r') as f:
-            # Ignore if first line doesn't contain wave headers
-            if "WAVEfmt" not in f.readline()[:20]:
-                continue
-            # show some progress
-            if counter % 100 == 0:
-                print counter
-            counter = counter + 1
-            if os.stat(path).st_size < 10 * 1024:
-                continue
-            # convert to ogg
-            FNULL = open(os.devnull, 'w')
-            subprocess.call(config["paths"]["tools"]+'ww2ogg.exe '+path+' --pcb '+config["paths"]["tools"]+'packed_codebooks_aoTuV_603.bin', stdout=FNULL, stderr=subprocess.STDOUT)
-            # if convert was successful
-            if os.path.isfile(path.replace(".xxx", ".ogg")):
-                # calculate hash from file contents
-                hash = hashlib.md5(f.read()).hexdigest()
-                temp_path = config["paths"]["exported"]+str(counter)+".ogg"
-                shutil.move(path.replace(".xxx", ".ogg"), temp_path)
-                # fix ogg
-                subprocess.call(config["paths"]["tools"]+'revorb.exe '+temp_path, stdout=FNULL, stderr=subprocess.STDOUT)
-                # check against hash storage
-                if hash in hashStorage:
-                    # move to a nice folder
-                    shutil.move(temp_path, config["paths"]["exported"]+hashStorage[hash])
-                else:
-                    # add hash to the unknowns list
-                    categorize_unknown(hash, temp_path)
+        contents = open(path, 'r').read()
+        # Ignore if first line doesn't contain wave headers
+        if "WAVEfmt" not in contents:
+            continue
+        # Ignore if file is smaller than the minimum size (default 10k)
+        if os.stat(path).st_size < config["min_size"]:
+            continue
+
+        # Convert to ogg using ww2ogg
+        subprocess.call([
+            config["paths"]["tools"]+'ww2ogg.exe', path,
+            '--pcb', config["paths"]["tools"]+'packed_codebooks_aoTuV_603.bin'],
+            stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+        path = path.replace(".xxx", ".ogg")
+        # If conversion fails, a file won't be created
+        if not os.path.isfile(path):
+            continue
+        # Use revorb to fix potential problems
+        subprocess.call([
+            config["paths"]["tools"]+'revorb.exe', path], 
+            stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+
+        # calculate hash from original file contents
+        hash = hashlib.md5(contents).hexdigest()
+        with open(folder+'/'+dir+'/'+file, 'r') as f:
+            f.readline()
+            contents2 = f.read()
+            hash2 = hashlib.md5(contents2).hexdigest()
+        if hash2 in hashStorage:
+            f = open(config["paths"]["important"], 'r').read()
+            g = open(config["paths"]["important"], 'w')
+            g.write(f.replace(hash2, hash))
+            g.close()
+            f = open(config["paths"]["noise"], 'r').read()
+            g = open(config["paths"]["noise"], 'w')
+            g.write(f.replace(hash2, hash))
+            g.close()
+            continue
+        # If hash is already known
+        if hash in hashStorage:
+            try:
+                shutil.move(path, config["paths"]["exported"]+hashStorage[hash])
+            except shutil.Error as e:
+                if e.message.startswith("Destination path"):
+                    continue # File already exists
+                raise
+        # Otherwise prompt user for categorization
+        else:
+            categorize_unknown(hash, path)

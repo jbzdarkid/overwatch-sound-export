@@ -1,4 +1,5 @@
 {
+    "min_size": 10240,
 	"full_extract": false,
 	"paths": {
 		"noise": "db/fingerprints_noise.csv",
