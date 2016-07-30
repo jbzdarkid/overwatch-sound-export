@@ -1,10 +1,9 @@
-import os, subprocess, shutil, hashlib, csv, pprint, sys, json
+import os, subprocess, shutil, hashlib, csv, sys, json
 
 print "Overwatch wem extractor v0.3"
 # get config
 with open('config.json') as data_file:
     config = json.load(data_file)
-counter = 1
 # get hash storage
 hashStorage = {}
 with open(config["paths"]["important"], 'r') as csvfile:
@@ -42,7 +41,7 @@ def categorize_unknown(hash, file):
             continue
         elif code.lower() == "x":
             os.remove(file)
-            sys.exit(0)
+            raise StopIteration
         elif code.lower() == "n":
             log = open(config["paths"]["noise"], 'a')
             log.write(hash + "\n")
@@ -58,19 +57,27 @@ def categorize_unknown(hash, file):
 
 folder = config["paths"]["casc"]
 # run through the casc folder
-for dir in os.listdir(folder):
-    for file in os.listdir(folder+'/'+dir):
-        # grab all the files
-        if not file.endswith(".xxx"):
-            continue
-        path = folder+'/'+dir+'/'+file
-        contents = open(path, 'r').read()
-        # Ignore if first line doesn't contain wave headers
-        if "WAVEfmt" not in contents:
-            continue
-        # Ignore if file is smaller than the minimum size (default 10k)
-        if os.stat(path).st_size < config["min_size"]:
-            continue
+try:
+    dirs = os.listdir(folder)
+    for i in xrange(len(dirs)):
+        print '%.02f%%' % (100.0*i/len(dirs))
+        dir = dirs[i]
+        for file in os.listdir(folder+'/'+dir):
+            # grab all the files
+            if not file.endswith(".xxx"):
+                continue
+            path = folder+'/'+dir+'/'+file
+            contents = open(path, 'r').read()
+            # Ignore if first line doesn't contain wave headers
+            if "WAVEfmt" not in contents:
+                continue
+            # Ignore if file is smaller than the minimum size (default 10k)
+            if os.stat(path).st_size < config["min_size"]:
+                continue
+            # calculate hash from original file contents
+            hash = hashlib.md5(contents).hexdigest()
+            if hash in hashStorage and os.path.isfile(_name(hash)):
+                continue # File already converted
 
         # Convert to ogg using ww2ogg
         subprocess.call([
@@ -113,3 +120,4 @@ for dir in os.listdir(folder):
         # Otherwise prompt user for categorization
         else:
             categorize_unknown(hash, path)
+except StopIteration: # User wants to stop categorizing files, cleanup and shut down
