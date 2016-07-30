@@ -79,45 +79,21 @@ try:
             if hash in hashStorage and os.path.isfile(_name(hash)):
                 continue # File already converted
 
-        # Convert to ogg using ww2ogg
-        subprocess.call([
-            config["paths"]["tools"]+'ww2ogg.exe', path,
-            '--pcb', config["paths"]["tools"]+'packed_codebooks_aoTuV_603.bin'],
-            stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
-        path = path.replace(".xxx", ".ogg")
-        # If conversion fails, a file won't be created
-        if not os.path.isfile(path):
-            continue
-        # Use revorb to fix potential problems
-        subprocess.call([
-            config["paths"]["tools"]+'revorb.exe', path], 
-            stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
-
-        # calculate hash from original file contents
-        hash = hashlib.md5(contents).hexdigest()
-        with open(folder+'/'+dir+'/'+file, 'r') as f:
-            f.readline()
-            contents2 = f.read()
-            hash2 = hashlib.md5(contents2).hexdigest()
-        if hash2 in hashStorage:
-            f = open(config["paths"]["important"], 'r').read()
-            g = open(config["paths"]["important"], 'w')
-            g.write(f.replace(hash2, hash))
-            g.close()
-            f = open(config["paths"]["noise"], 'r').read()
-            g = open(config["paths"]["noise"], 'w')
-            g.write(f.replace(hash2, hash))
-            g.close()
-            continue
-        # If hash is already known
-        if hash in hashStorage:
-            try:
-                shutil.move(path, config["paths"]["exported"]+hashStorage[hash])
-            except shutil.Error as e:
-                if e.message.startswith("Destination path"):
-                    continue # File already exists
-                raise
-        # Otherwise prompt user for categorization
-        else:
-            categorize_unknown(hash, path)
+            # Convert to ogg using ww2ogg
+            subprocess.call([
+                config["paths"]["tools"]+'ww2ogg.exe', path,
+                '--pcb', config["paths"]["tools"]+'packed_codebooks_aoTuV_603.bin'],
+                stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+            path = path.replace(".xxx", ".ogg")
+            # If conversion fails, a file won't be created
+            if not os.path.isfile(path):
+                continue
+            # Use revorb to fix potential problems
+            subprocess.call([
+                config["paths"]["tools"]+'revorb.exe', path], 
+                stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+            if hash not in hashStorage: # New file
+                categorize_unknown(hash, path)
+            else: # If hash is already known
+                shutil.move(path, _name(hash))
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
