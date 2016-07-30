@@ -15,6 +15,15 @@ with open(config["paths"]["noise"], 'r') as csvfile:
     for row in hashreader:
         hashStorage[row[0]] = 'noise/'
 
+def _name(hash):
+    name = ""
+    if hash in hashStorage:
+        name += hashStorage[hash]
+    if name[-1] == "/":
+        name += hash # File is not transcribed
+    name += ".ogg" # Transcriptions (and hashes) have no extension
+    return name
+
 def play(file):
     file = file.replace("/", "\\") # Windows slashes
     os.system(file) # Windows equivalent of 'open', i.e. will start playing
@@ -97,3 +106,18 @@ try:
             else: # If hash is already known
                 shutil.move(path, _name(hash))
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
+    data = []
+    with open(config["paths"]["important"], 'r') as csvfile:
+        hashreader = csv.reader(csvfile, delimiter=',')
+        for row in hashreader:
+            data.append([row[1], row[0]])
+        data.sort()
+    with open(config["paths"]["important"], 'w') as csvfile:
+        csvfile.write('\n'.join([row[1]+','+row[0] for row in data]))
+    data = ''
+    with open(config["paths"]["noise"], 'r') as csvfile:
+        for row in hashreader:
+            data.append(row)
+    data.sort()
+    with open(config["paths"]["noise"], 'w') as csvfile:
+        csvfile.write('\n'.join([row[0]+','+row[1] for row in data]))
