@@ -116,6 +116,7 @@ except StopIteration: # User wants to stop categorizing files, cleanup and shut 
         csvfile.write('\n'.join([row[1]+','+row[0] for row in data]))
     data = []
     with open(config["paths"]["noise"], 'r') as csvfile:
+        hashreader = csv.reader(csvfile, delimiter=',')
         for row in hashreader:
             data.append(row[0])
     data.sort()
