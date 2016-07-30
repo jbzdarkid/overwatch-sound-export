@@ -16,7 +16,7 @@ with open(config["paths"]["noise"], 'r') as csvfile:
         hashStorage[row[0]] = 'noise/'
 
 def _name(hash):
-    name = ""
+    name = config["paths"]["exported"]
     if hash in hashStorage:
         name += hashStorage[hash]
     if name[-1] == "/":
@@ -114,10 +114,10 @@ except StopIteration: # User wants to stop categorizing files, cleanup and shut 
         data.sort()
     with open(config["paths"]["important"], 'w') as csvfile:
         csvfile.write('\n'.join([row[1]+','+row[0] for row in data]))
-    data = ''
+    data = []
     with open(config["paths"]["noise"], 'r') as csvfile:
         for row in hashreader:
-            data.append(row)
+            data.append(row[0])
     data.sort()
     with open(config["paths"]["noise"], 'w') as csvfile:
-        csvfile.write('\n'.join([row[0]+','+row[1] for row in data]))
+        csvfile.write('\n'.join(data))
