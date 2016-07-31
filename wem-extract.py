@@ -113,7 +113,7 @@ except StopIteration: # User wants to stop categorizing files, cleanup and shut 
             data.append([row[1], row[0]])
         data.sort()
     with open(config["paths"]["important"], 'w') as csvfile:
-        csvfile.write('\n'.join([row[1]+','+row[0] for row in data]))
+        csvfile.write('\n'.join([row[1]+','+row[0] for row in data])+'\n')
     data = []
     with open(config["paths"]["noise"], 'r') as csvfile:
         hashreader = csv.reader(csvfile, delimiter=',')
@@ -121,4 +121,4 @@ except StopIteration: # User wants to stop categorizing files, cleanup and shut 
             data.append(row[0])
     data.sort()
     with open(config["paths"]["noise"], 'w') as csvfile:
-        csvfile.write('\n'.join(data))
+        csvfile.write('\n'.join(data)+'\n')
