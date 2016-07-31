@@ -27,7 +27,12 @@ def _name(hash):
 def play(file):
     file = file.replace("/", "\\") # Windows slashes
     os.system(file) # Windows equivalent of 'open', i.e. will start playing
-
+    try:
+        from SendKeys import SendKeys
+        SendKeys('%{TAB}') # Alt-Tab
+    except ImportError:
+        pass
+    
 def categorize_unknown(hash, file):
     play(file)
     while 1:
