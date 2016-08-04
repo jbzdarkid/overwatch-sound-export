@@ -111,19 +111,23 @@ try:
             else: # If hash is already known
                 shutil.move(path, _name(hash))
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
-    data = []
+    sounds = []
     with open(config["paths"]["important"], 'r') as csvfile:
         hashreader = csv.reader(csvfile, delimiter=',')
         for row in hashreader:
-            data.append([row[1], row[0]])
-        data.sort()
+            sounds.append([row[1], row[0]])
+        sounds.sort()
     with open(config["paths"]["important"], 'w') as csvfile:
-        csvfile.write('\n'.join([row[1]+','+row[0] for row in data])+'\n')
-    data = []
+        csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
+    noises = []
     with open(config["paths"]["noise"], 'r') as csvfile:
         hashreader = csv.reader(csvfile, delimiter=',')
         for row in hashreader:
-            data.append(row[0])
-    data.sort()
+            noises.append(row[0])
+    noises.sort()
     with open(config["paths"]["noise"], 'w') as csvfile:
-        csvfile.write('\n'.join(data)+'\n')
+        csvfile.write('\n'.join(noises)+'\n')
+    # Data now saved as sorted
+    
+    
+        
