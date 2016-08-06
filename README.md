@@ -14,9 +14,9 @@ Just download & place in a folder of your choice.
 
 ### 2. Get Tools
 This project depends on three tools.
-* ww2ogg -> converts wem format to ogg. http://hcs64.com/files/ww2ogg019.zip
+* ww2ogg -> converts wem format to ogg. https://github.com/hcs64/ww2ogg/releases/download/0.24/ww2ogg024.zip
 * revorb -> fixes ogg headers. http://yirkha.fud.cz/progs/foobar2000/revorb.exe
-* casc tools -> helps us export contents from blizzard archive files. http://www.zezula.net/en/casc/main.html
+* casc tools -> extracts the raw files from overwatch. http://www.zezula.net/en/casc/main.html
 
 Once downloaded, place the following files directly into the tools folder:
 
@@ -31,8 +31,8 @@ This project runs on Python 2.7.
 Grab it from here: https://www.python.org/downloads/
 
 ### 4. Extract CASC
-* Launch CascView.exe, select Open Storage -> Program Files/Overwatch.
-* Extract the "unknown" folder to this repo, in the /casc folder.
+* Launch CascView.exe, select Open Storage -> Program Files/Overwatch. 
+* Extract the "unknown" folder to this repo, in the /casc folder.  Be sure to hit the checkbox for "Delete the local file and continue extracting"
 
 ### 5. Run the script.
 * Double-click run_extract.bat.
