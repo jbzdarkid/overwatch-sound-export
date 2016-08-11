@@ -21,8 +21,8 @@ def _name(hash):
         name += hashStorage[hash]
     if name[-1] == "/":
         name += hash # File is not transcribed
-    name += ".ogg" # Transcriptions (and hashes) have no extension
-    return name
+    # Transcriptions (and hashes) have no extension
+    return name + ".ogg"
 
 def play(file):
     file = file.replace("/", "\\") # Windows slashes
@@ -37,7 +37,7 @@ def categorize_unknown(hash, file):
     play(file)
     while 1:
         try:
-            code = raw_input()
+            code = raw_input().strip().lower()
         except KeyboardInterrupt:
             code = "x"
         if code == "?" or code == "":
@@ -111,23 +111,23 @@ try:
             else: # If hash is already known
                 shutil.move(path, _name(hash))
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
-    sounds = []
-    with open(config["paths"]["important"], 'r') as csvfile:
-        hashreader = csv.reader(csvfile, delimiter=',')
-        for row in hashreader:
-            sounds.append([row[1], row[0]])
-        sounds.sort()
-    with open(config["paths"]["important"], 'w') as csvfile:
-        csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
-    noises = []
-    with open(config["paths"]["noise"], 'r') as csvfile:
-        hashreader = csv.reader(csvfile, delimiter=',')
-        for row in hashreader:
-            noises.append(row[0])
-    noises.sort()
-    with open(config["paths"]["noise"], 'w') as csvfile:
-        csvfile.write('\n'.join(noises)+'\n')
-    # Data now saved as sorted
-    
-    
-        
+    pass
+sounds = []
+with open(config["paths"]["important"], 'r') as csvfile:
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for row in hashreader:
+        sounds.append([row[1], row[0]])
+    sounds.sort()
+with open(config["paths"]["important"], 'w') as csvfile:
+    csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
+noises = []
+with open(config["paths"]["noise"], 'r') as csvfile:
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for row in hashreader:
+        noises.append(row[0])
+noises.sort()
+with open(config["paths"]["noise"], 'w') as csvfile:
+    csvfile.write('\n'.join(noises)+'\n')
+# Data now saved as sorted
+
+
