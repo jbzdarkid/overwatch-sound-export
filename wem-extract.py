@@ -69,6 +69,43 @@ def categorize_unknown(hash, file):
             log.close()
             break
 
+def transcribe_file(hash, path):
+    file = config["paths"]["exported"] + path + hash + ".ogg"
+    play(file)
+    while 1:
+        try:
+            code = raw_input().strip().lower()
+        except KeyboardInterrupt:
+            code = "x"
+        if code == "?" or code == "":
+            print "n - Categorize as noise"
+            print "r - Re-listen"
+            print "s - Skip"
+            print "? - Print this help"
+            print "x - Exit"
+            print "Any other value - Transcribe as value"
+            print "Note: If value contains a / then"
+            print "it will override the directory"
+            continue
+        elif code.lower() == "s":
+            return path
+        elif code.lower() == "r":
+            play(file)
+            continue
+        elif code.lower() == "x":
+            raise StopIteration
+        else:
+            code = code.lower().replace(' ', '_')
+            # Remove non filename-safe characters. Credit to Vinko Vrsalovic:
+            # http://stackoverflow.com/q/295135
+            import string
+            valid_chars = '-_.()/%s%s' % (string.ascii_letters, string.digits)
+            code = ''.join(c for c in code if c in valid_chars)
+            if '/' in code:
+                return code
+            else:
+                return path + code
+
 folder = config["paths"]["casc"]
 # run through the casc folder
 try:
@@ -130,4 +167,17 @@ with open(config["paths"]["noise"], 'w') as csvfile:
     csvfile.write('\n'.join(noises)+'\n')
 # Data now saved as sorted
 
+done_transcribing = False
+new_data = []
+with open(config["paths"]["important"], 'r') as csvfile:
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for hash, path in hashreader:
+        if path[-1] == '/' and not done_transcribing: # File not transcribed
+            try:
+                path = transcribe_file(hash, path)
+            except StopIteration:
+                done_transcribing = True
+        new_data.append([hash, path])
 
+with open(config["paths"]["important"], 'w') as csvfile:
+    csvfile.write('\n'.join([row[0]+','+row[1] for row in new_data])+'\n')
