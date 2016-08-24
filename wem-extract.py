@@ -163,9 +163,9 @@ with open(config["paths"]["important"], 'r') as csvfile:
                 lines_transcribed += 1
             except StopIteration:
                 done_transcribing = True
-                print 100.0*lines_transcribed/len(sounds), '%'
         sounds.append([path, hash])
-    sounds.sort()
+print 100.0*lines_transcribed/len(sounds), '%'
+sounds.sort()
 
 with open(config["paths"]["important"], 'w') as csvfile:
     csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
