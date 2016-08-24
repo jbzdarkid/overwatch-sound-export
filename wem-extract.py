@@ -164,11 +164,11 @@ with open(config["paths"]["important"], 'r') as csvfile:
             except StopIteration:
                 done_transcribing = True
                 print 100.0*lines_transcribed/len(sounds), '%'
-        sounds.append([hash, path])
+        sounds.append([path, hash])
     sounds.sort()
 
 with open(config["paths"]["important"], 'w') as csvfile:
-    csvfile.write('\n'.join([row[0]+','+row[1] for row in sounds])+'\n')
+    csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
 
 noises = []
 with open(config["paths"]["noise"], 'r') as csvfile:
