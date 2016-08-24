@@ -149,6 +149,7 @@ try:
                 shutil.move(path, _name(hash))
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
     pass
+
 sounds = []
 with open(config["paths"]["important"], 'r') as csvfile:
     hashreader = csv.reader(csvfile, delimiter=',')
@@ -167,6 +168,7 @@ with open(config["paths"]["noise"], 'w') as csvfile:
     csvfile.write('\n'.join(noises)+'\n')
 # Data now saved as sorted
 
+lines_transcribed = 0
 done_transcribing = False
 new_data = []
 with open(config["paths"]["important"], 'r') as csvfile:
@@ -175,9 +177,12 @@ with open(config["paths"]["important"], 'r') as csvfile:
         if path[-1] == '/' and not done_transcribing: # File not transcribed
             try:
                 path = transcribe_file(hash, path)
+                lines_transcribed += 1
             except StopIteration:
                 done_transcribing = True
         new_data.append([hash, path])
+
+print lines_transcribed/float(len(new_data)), '%'
 
 with open(config["paths"]["important"], 'w') as csvfile:
     csvfile.write('\n'.join([row[0]+','+row[1] for row in new_data])+'\n')
