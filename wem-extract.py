@@ -150,27 +150,10 @@ try:
 except StopIteration: # User wants to stop categorizing files, cleanup and shut down
     pass
 
-sounds = []
-with open(config["paths"]["important"], 'r') as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=',')
-    for row in hashreader:
-        sounds.append([row[1], row[0]])
-    sounds.sort()
-with open(config["paths"]["important"], 'w') as csvfile:
-    csvfile.write('\n'.join([row[1]+','+row[0] for row in sounds])+'\n')
-noises = []
-with open(config["paths"]["noise"], 'r') as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=',')
-    for row in hashreader:
-        noises.append(row[0])
-noises.sort()
-with open(config["paths"]["noise"], 'w') as csvfile:
-    csvfile.write('\n'.join(noises)+'\n')
-# Data now saved as sorted
-
+# Start transcription
 lines_transcribed = 0
 done_transcribing = False
-new_data = []
+sounds = []
 with open(config["paths"]["important"], 'r') as csvfile:
     hashreader = csv.reader(csvfile, delimiter=',')
     for hash, path in hashreader:
@@ -180,9 +163,20 @@ with open(config["paths"]["important"], 'r') as csvfile:
                 lines_transcribed += 1
             except StopIteration:
                 done_transcribing = True
-        new_data.append([hash, path])
-
-print lines_transcribed/float(len(new_data)), '%'
+                print 100.0*lines_transcribed/len(sounds), '%'
+        sounds.append([hash, path])
+    sounds.sort()
 
 with open(config["paths"]["important"], 'w') as csvfile:
-    csvfile.write('\n'.join([row[0]+','+row[1] for row in new_data])+'\n')
+    csvfile.write('\n'.join([row[0]+','+row[1] for row in sounds])+'\n')
+
+noises = []
+with open(config["paths"]["noise"], 'r') as csvfile:
+    hashreader = csv.reader(csvfile, delimiter=',')
+    for row in hashreader:
+        noises.append(row[0])
+noises.sort()
+with open(config["paths"]["noise"], 'w') as csvfile:
+    csvfile.write('\n'.join(noises)+'\n')
+
+# Data now saved as sorted
