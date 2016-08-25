@@ -26,7 +26,10 @@ def _name(hash):
 
 def play(file):
     file = file.replace("/", "\\") # Windows slashes
-    os.system(file) # Windows equivalent of 'open', i.e. will start playing
+    ret = os.system(file) # Windows equivalent of 'open', i.e. will start playing
+    if ret != 0:
+        raise OSError
+
     try:
         from SendKeys import SendKeys
         SendKeys('%{TAB}') # Alt-Tab
@@ -156,13 +159,20 @@ done_transcribing = False
 sounds = []
 with open(config["paths"]["important"], 'r') as csvfile:
     hashreader = csv.reader(csvfile, delimiter=',')
+    prev_path = ""
     for hash, path in hashreader:
         if path[-1] == '/' and not done_transcribing: # File not transcribed
+            if path != prev_path:
+                print path # Warn the user that we're in a new dir
+            prev_path = path
             try:
                 path = transcribe_file(hash, path)
                 lines_transcribed += 1
             except StopIteration:
                 done_transcribing = True
+            except OSError:
+                print 'Corrupt path removed.'
+                continue
         sounds.append([path, hash])
 print 100.0*lines_transcribed/len(sounds), '%'
 sounds.sort()
@@ -180,3 +190,4 @@ with open(config["paths"]["noise"], 'w') as csvfile:
     csvfile.write('\n'.join(noises)+'\n')
 
 # Data now saved as sorted
+raw_input('Press [enter] to exit.')
