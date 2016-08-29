@@ -165,10 +165,10 @@ with open(config["paths"]["important"], 'r') as csvfile:
             lines_transcribed += 1
         elif done_transcribing: # User requested stop
             pass
-        elif path != prev_path:
-            print path # Warn the user that we're in a new dir
-            prev_path = path
         else:
+            if path != prev_path:
+                print path # Warn the user that we're in a new dir
+                prev_path = path
             try:
                 path = transcribe_file(hash, path)
                 lines_transcribed += 1
