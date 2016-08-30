@@ -154,7 +154,10 @@ try:
                 stdout=open(os.devnull, "w"), stderr=subprocess.STDOUT)
             if hash not in hashStorage: # New file
                 categorize_unknown(hash, path)
-            shutil.move(path, _name(hash))
+            try:
+                shutil.move(path, _name(hash))
+            except IOError:
+                pass
 except StopIteration: # User wants to stop categorizing files
     pass
 
