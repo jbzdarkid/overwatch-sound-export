@@ -118,6 +118,9 @@ folder = config["paths"]["casc"]
 try:
     dirs = os.listdir(folder)
     for i in xrange(len(dirs)):
+        if i%3 == 0: # Progress bar
+            sys.stdout.write('.')
+            sys.stdout.flush()
         dir = dirs[i]
         for file in os.listdir(folder+"/"+dir):
             # grab all the files
