@@ -2,45 +2,39 @@
 # Overwatch - Sound export
 This usefool tool + tutorial gets you all the sound files extracted from the overwatch data files.
 
-## Quick tutorial
-1. Grab git contents
-2. Get Tools
-3. Get Python
-4. Extract CASC
-5. Run Python Script
-6. Enjoy the sound files / contribute
+## Summary
+1. Download this repository
+1a. Install Python
+2. Download the required tools
+3. Extract CASC (data files)
+4. Run Python Script
 
-### 1. Grab git contents
-Just download & place in a folder of your choice.
+### 1. Download this repository
+[Click this](https://github.com/jbzdarkid/overwatch-sound-export/archive/master.zip). Extract the zip file and take not of its location.
 
-### 2. Get Tools
-This project depends on three tools.
-* ww2ogg -> converts wem format to ogg. https://github.com/hcs64/ww2ogg/releases/download/0.24/ww2ogg024.zip
-* revorb -> fixes ogg headers. http://yirkha.fud.cz/progs/foobar2000/revorb.exe
-* casc tools -> extracts the raw files from overwatch. http://www.zezula.net/en/casc/main.html
+#### 1a. Install python
+This project runs on Python 2.7. 3.x compatibility is planned, but until then please downlad python [from the official site](https://www.python.org/downloads/).
 
-Once downloaded, place the following files directly into the tools folder:
+### 2. Download the required tools
+* [CascView](http://www.zezula.net/en/casc/main.html) Extracts the raw sound files from the game
+* [ww2ogg])https://github.com/hcs64/ww2ogg/releases/download/0.24/ww2ogg024.zip) Converts wem (the raw sound file format) to ogg, a lossless audio codec.
+* [revorb](http://yirkha.fud.cz/progs/foobar2000/revorb.exe) Fixes some problems after the conversion.
 
-* ww2ogg -> ww2ogg.exe
-* ww2ogg -> packed_codebooks_aoTuV_603.bin
-* revorb.exe
+Once downloaded, move these files into this repository's tools folder:
 
-(tools folder is projectfolder/tools)
+* ww2ogg.exe (from ww2ogg)
+* packed_codebooks_aoTuV_603.bin (from ww2ogg)
+* revorb.exe (from revorb)
 
-### 3. Get Python
-This project runs on Python 2.7.
-Grab it from here: https://www.python.org/downloads/
+### 3. Extract CASC (data files)
+* Launch CascView.exe, select Open Storage -> Program Files/Overwatch.
+* Extract the "unknown" folder into this reposoitory's casc folder.  Be sure to hit the checkbox for "Delete the local file and continue extracting"
 
-### 4. Extract CASC
-* Launch CascView.exe, select Open Storage -> Program Files/Overwatch. 
-* Extract the "unknown" folder to this repo, in the /casc folder.  Be sure to hit the checkbox for "Delete the local file and continue extracting"
-
-### 5. Run the script.
+### 4. Run Python Script
 * Double-click run_extract.bat.
 * If an error crops up, right click on run_extract.bat -> Edit, and make sure the path to python.exe is correct. (compare it to the place where you installed Python 2.7)
 * Then, run the batch file again.
+* For any other problems, open an issue on github and I'll do my best to help.
 
-### 5a. Categorizing files
-* If a file has an unknown hash (e.g. a new character's voice lines), the script will prompt you to categorize it. Type in a code and press enter to save the categorization:
-** ? - Show this help
-* Once done, please create a pull request with your modifications to the .csv files.
+## Bugs? Feature requests?
+If there's anything wrong (typos in transcription, miscategorized files) please feel free to open a github issue, or make a pull request.
