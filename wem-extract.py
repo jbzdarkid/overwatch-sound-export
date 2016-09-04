@@ -1,22 +1,34 @@
-import os, subprocess, shutil, hashlib, csv, sys, json
+import os # system, stat, path.isfile, remove, listdir, devnull
+import subprocess # call, STDOUT
+from shutil import move
+from hashlib import md5
+from csv import reader
 
-print "Overwatch wem extractor v0.3"
-# get config
-with open("config.json") as data_file:
-    config = json.load(data_file)
+# Loading the config.
+from sys import version_info
+if version_info.major == 2:
+    import ConfigParser as configparser
+elif version_info.major == 3:
+    import configparser
+else:
+    raise Exception("Unknown version:", version_info)
+config = configparser.ConfigParser()
+config.read("settings.conf")
+
+print "Overwatch wem extractor v0.4"
 # get hash storage
 hashStorage = {}
-with open(config["paths"]["important"], "r") as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=",")
+with open(config.get("paths", "important"), "r") as csvfile:
+    hashreader = reader(csvfile, delimiter=",")
     for row in hashreader:
         hashStorage[row[0]] = row[1]
-with open(config["paths"]["noise"], "r") as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=",")
+with open(config.get("paths", "noise"), "r") as csvfile:
+    hashreader = reader(csvfile, delimiter=",")
     for row in hashreader:
         hashStorage[row[0]] = "noise/"
 
 def _name(hash):
-    name = config["paths"]["exported"]
+    name = config.get("paths", "exported")
     if hash in hashStorage:
         name += hashStorage[hash]
     if name[-1] == "/":
@@ -62,7 +74,7 @@ def categorize_unknown(hash, file):
             os.remove(file)
             raise StopIteration
         elif code.lower() == "n":
-            log = open(config["paths"]["noise"], "a")
+            log = open(config.get("paths", "noise"), "a")
             log.write(hash + "\n")
             log.close()
             hashStorage[hash] = "noise/"
@@ -70,14 +82,14 @@ def categorize_unknown(hash, file):
         else:
             if not code.endswith("/"):
                 code = code + "/"
-            log = open(config["paths"]["important"], "a")
+            log = open(config.get("paths", "important"), "a")
             log.write(hash + "," + code + "\n")
             log.close()
             hashStorage[hash] = hash + "," + code + "\n"
             break
 
 def transcribe_file(hash, path):
-    file = config["paths"]["exported"] + path + hash + ".ogg"
+    file = config.get("paths", "exported") + path + hash + ".ogg"
     play(file)
     while 1:
         try:
@@ -113,7 +125,7 @@ def transcribe_file(hash, path):
             else:
                 return path + code
 
-folder = config["paths"]["casc"]
+folder = config.get("paths", "casc")
 # run through the casc folder
 try:
     dirs = os.listdir(folder)
@@ -130,30 +142,35 @@ try:
             if "WAVEfmt" not in contents:
                 continue
             # Ignore if file is smaller than the minimum size (default 10k)
-            if os.stat(path).st_size < config["min_size"]:
+            if os.stat(path).st_size < config.get("default", "min_size"):
                 continue
             # calculate hash from original file contents
-            hash = hashlib.md5(contents).hexdigest()
+            hash = md5(contents).hexdigest()
             if hash in hashStorage and os.path.isfile(_name(hash)):
                 continue # File already converted
 
             # Convert to ogg using ww2ogg
             subprocess.call([
-                config["paths"]["tools"]+"ww2ogg.exe", path,
-                "--pcb", config["paths"]["tools"]+"packed_codebooks_aoTuV_603.bin"],
-                stdout=open(os.devnull, "w"), stderr=subprocess.STDOUT)
+                    config.get("paths", "tools")+"ww2ogg.exe",
+                    path,
+                    "--pcb",
+                    config.get("paths", "tools")+"packed_codebooks_aoTuV_603.bin"
+                ],
+                stdout=open(os.devnull, "w"),
+                stderr=subprocess.STDOUT)
             path = path.replace(".xxx", ".ogg")
             # If conversion fails, a file won't be created
             if not os.path.isfile(path):
                 continue
             # Use revorb to fix potential problems
             subprocess.call([
-                config["paths"]["tools"]+"revorb.exe", path], 
-                stdout=open(os.devnull, "w"), stderr=subprocess.STDOUT)
+                config.get("paths", "tools")+"revorb.exe", path], 
+                stdout=open(os.devnull, "w"),
+                stderr=subprocess.STDOUT)
             if hash not in hashStorage: # New file
                 categorize_unknown(hash, path)
             try:
-                shutil.move(path, _name(hash))
+                move(path, _name(hash))
             except IOError:
                 pass
 except StopIteration: # User wants to stop categorizing files
@@ -163,8 +180,8 @@ except StopIteration: # User wants to stop categorizing files
 lines_transcribed = 0
 done_transcribing = False
 sounds = []
-with open(config["paths"]["important"], "r") as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=",")
+with open(config.get("paths", "important"), "r") as csvfile:
+    hashreader = reader(csvfile, delimiter=",")
     prev_path = ""
     for hash, path in hashreader:
         if path[-1] != "/": # Already transcribed
@@ -186,16 +203,16 @@ with open(config["paths"]["important"], "r") as csvfile:
         sounds.append([path, hash])
 sounds.sort()
 
-with open(config["paths"]["important"], "w") as csvfile:
+with open(config.get("paths", "important"), "w") as csvfile:
     csvfile.write("\n".join([row[1]+","+row[0] for row in sounds])+"\n")
 
 noises = []
-with open(config["paths"]["noise"], "r") as csvfile:
-    hashreader = csv.reader(csvfile, delimiter=",")
+with open(config.get("paths", "noise"), "r") as csvfile:
+    hashreader = reader(csvfile, delimiter=",")
     for row in hashreader:
         noises.append(row[0])
 noises.sort()
-with open(config["paths"]["noise"], "w") as csvfile:
+with open(config.get("paths", "noise"), "w") as csvfile:
     csvfile.write("\n".join(noises)+"\n")
 
 readme = open("README.md").read().split("\n")
