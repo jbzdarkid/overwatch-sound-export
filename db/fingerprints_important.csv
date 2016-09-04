@@ -1,7 +1,5 @@
-a75a66b61b2d2bbfcd54c6f93febdf56,announcer/
-c0c77d9998a26f6c90272bc35272cfb0,announcer/
-e88710af8addcfe5d804de502793e811,announcer/
-f873bb0d12e805217740e4a4d3db59d5,announcer/
+4e933af87b8807a57c428eecdfcd26b1,announcer/
+c1350d2890ed4675b37e5b2332c9b12f,announcer/
 3b952ad87c063c695792755b4bb76302,announcer/1
 4195f0fd4fe56a570bebe13406f93b27,announcer/10
 3c4bebb3f549c1598ba00800426c185c,announcer/11
@@ -68,9 +66,11 @@ ff71e295d5a35e1b59d2c655c0ea138d,announcer/new_defense_point_objective_d
 053f8e32854935299b638dd259a17c9f,announcer/new_defense_point_objective_e
 1e0c2331828fac27c5e38c2c88495c8f,announcer/new_hero_level
 6342d9c8b0a9a2e238f4f1bf978b63ea,announcer/new_heros_joining
+c0c77d9998a26f6c90272bc35272cfb0,announcer/new_personal_best
 0b7ea7514c3a700ad19f12fd54f93300,announcer/next_match_beginning_soon
 07eab1a269ea6974f128f671b2e78514,announcer/next_round
 02426f8501822bb12e15e64c50ffd7dc,announcer/next_round_beginning_soon
+a75a66b61b2d2bbfcd54c6f93febdf56,announcer/now_arriving_at_lijian_tower
 661ccf31194ee55a83125a2f40800318,announcer/now_changing_skirmish_locations
 e909668975b5219a88d0c5730358374b,announcer/now_entering_kings_row
 70dd21a83412486dcae215ad3e05ed3c,announcer/now_entering_the_temple_of_anubis
@@ -106,6 +106,7 @@ c22bc6fb4a1828da106f28e67df7b20c,announcer/round_1_begins_in_30_seconds
 23e2c1a28c7dece584de2987d348cce3,announcer/round_20
 d6f7c45c182065c8b0a16c0d8ed2cfdf,announcer/round_2_begins_in_10_seconds
 c18a145d927833dd9e7c32f3f7c9b8a3,announcer/round_2_begins_in_20_seconds
+e88710af8addcfe5d804de502793e811,announcer/round_3_begins_in_10_seconds
 c00aab869ee982da594317c85e763100,announcer/round_3_begins_in_30_seconds
 45f81c3e673a44543ad402a71a9528b1,announcer/round_3_won
 ea72ff60bcda6d59d617b6d5564cf437,announcer/round_4_capture_the_objective
@@ -134,6 +135,7 @@ d86b7bd04a8ef008d0a88b99fd418e26,announcer/the_payload_is_moving
 9c58ff58c0c01b29ef602149b637b402,announcer/to_14
 16e7faef6ccb79fc700b6be9a7e490c4,announcer/to_16
 7e3a41d3105c0c22271908e70a929ba4,announcer/to_17
+f873bb0d12e805217740e4a4d3db59d5,announcer/to_19
 858560e0b5c8504f6de4a0c04c9dbb00,announcer/to_22
 85696945126596a994f1c8bb763ad7ba,announcer/to_24
 2d17a7a11507c3e6b02ad8bea14a275e,announcer/to_28
@@ -153,6 +155,7 @@ ffd8b48408e91e5429bb9f6798adbb71,announcer/welcome_to_season_1
 94dd59e1481ea155bbd817e4579e5b89,announcer/welcome_to_season_4
 bfb4663cb2283623d63d9e2b46456538,announcer/welcome_to_the_preseason
 ee192c932a879fa171891099f2d8bb18,announcer/well
+82dab9ccd390e5aebd7d4a940be594e3,athena/
 3f55e8246a8efc56ab49022bc4266d46,athena/activate_the_hero_select_screen_to_continue
 507c22d0af61fcc3b3a737928ead40ad,athena/alert_weapons_discharge_detected_in_ordnance_bay
 fef9dc0711a1ce5b96477f7e43e42d50,athena/before_you_begin_there_is_one_thing_i_wanted_to_go_over_with_you_there_will_be_times_when_you_want_to_switch_heros_during_a_game
@@ -247,8 +250,9 @@ cc2bf86ceafe5ff2112ad77b7df6e0bf,athena/your_primary_weapon_is_your_heavy_pulse_
 e13f667ca54d3390f062c3743dd2200e,hero/ana/thats_how_we_do_it
 c6783a71c900a4d03bda498c34cebd14,hero/ana/time_to_pick_up_where_i_left_off
 08194b43964e6ecb22dd5cb86a362ec2,hero/ana/we_dont_have_much_time_dont_let_up
-0cfafa2f8ea08bf2ac38011c5d43cd0f,hero/bastion/61
-d139eb2e677886ff6492dd23da368d20,hero/bastion/60
+06e338ff09baa4270ee248ae6ba5c04d,hero/bastion/
+70b925c16b5e96cb43b4e146e13602c1,hero/bastion/
+8db1f885dfe526a078b09b98ee7888e0,hero/bastion/
 00cdce1bb5475f0707c085f2c2858388,hero/bastion/01
 04816ae7acc69b761354102aa86722bb,hero/bastion/02
 0a69fd28826290f0cce9267cc54ba60d,hero/bastion/03
@@ -308,6 +312,8 @@ de26b76ae521636e34bf88cf2de4c51c,hero/bastion/56
 2a7c70e4577032c508a98e3146449810,hero/bastion/57
 54438625e263277e57e91b82038474e9,hero/bastion/58
 c308c67de57fc5fd7559e65a29dfe24a,hero/bastion/59
+d139eb2e677886ff6492dd23da368d20,hero/bastion/60
+0cfafa2f8ea08bf2ac38011c5d43cd0f,hero/bastion/61
 33822af3deecfee36b0f50adff381d10,hero/bastion/boo_boo_doo_de_boo
 2c63cecc3b4f01f7966da9626cf53cfe,hero/bastion/dah-dah_wheeeee
 1bc5a82f88a934f54006dd09949a649f,hero/bastion/dun_dun_boop_boop
@@ -409,9 +415,11 @@ f7eea94fc023d1d087d866406d4be432,hero/dva/up_up_down_down_left_right_left_right_
 ac643defc4a430b109dc083e264fe596,hero/dva/woah_you_got_some_leet_skills
 7988dfdad2a05e476b2e13e839e1f3d3,hero/dva/woo_i_hit_the_jackpot
 8c08c1180d0e5bf38123df605d59bb0e,hero/dva/yeah_pocket_healer
+101ed78f49366155741e234fb58c038b,hero/genji/
 1eaf9909ce41b50b7b0f997dabed47e7,hero/genji/
 4655d8b4060ef1f2c7c653f309627939,hero/genji/
 498e4ef598a0cacdcf33cb5168b4f72a,hero/genji/
+4fb4f2e7cf8756529f5bd1c1da34553d,hero/genji/
 689d626ca3e55fa84d51365f4557a4a7,hero/genji/
 8119a5ecbf4b1e52afebae61fec491e8,hero/genji/
 849cb9d12e1c3eb5a54a4f3f8e761e10,hero/genji/
@@ -419,6 +427,7 @@ ac643defc4a430b109dc083e264fe596,hero/dva/woah_you_got_some_leet_skills
 91b58a1c159963ca11790415ddba554e,hero/genji/
 9bda76e1d7348e703f6792f7dbbf6be7,hero/genji/
 a18dbf5296d68c85824bfb1358c9b6dd,hero/genji/
+ad7fd51a3c0f38a6478baa986ce026d2,hero/genji/
 b1802379fdd77e2b64ca40338fdc9d94,hero/genji/
 b7034808bae848c75cdfbeb2df9f95d9,hero/genji/
 ba1d9f4faf1bd8cce1b21a1d9d43a2b9,hero/genji/
@@ -610,8 +619,11 @@ b0e3b48dd6167f14d2698d2b87ab627c,hero/hanzo/with_every_death_comes_honor_with_ho
 3f739c42cc185c2493346499d60580fa,hero/hanzo/you_honor_me
 5288e26ad45006aa13b6cc405ef3de89,hero/hanzo/you_will_never_amount_to_anything
 0cac06ff7ff9a7d478f09844b7b0dcb3,hero/junkrat/
+0e9976f254afdac3eae7ae11627753df,hero/junkrat/
 34b7cac6cf69d98b3109bd98ffdc88dd,hero/junkrat/
 37b9618f419c47108b75bd50ec10d166,hero/junkrat/
+85e9184784b2047177917746e7617335,hero/junkrat/
+9667a716ad98d51ceefcf5e4570f45ac,hero/junkrat/
 e5b32dd37b982aed2601ef8d80c59a4b,hero/junkrat/
 fef67c55d8a34d34e05f103c7165e0a2,hero/junkrat/
 825c3b6d641e4892fb03bea171c60db6,hero/junkrat/5_4_3_2_1
@@ -720,10 +732,14 @@ fcda78a46abeb16fe7d4588be4a1d24a,hero/junkrat/well_thats_a_fine_how_do_you_do
 2817d556f5ea55948a777eded2d190b4,hero/junkrat/you_look_like_the_kind_of_guy_who_could_use_something_blown_up
 7ac8170277967c445af91af1b5fad049,hero/junkrat/youre_making_it_easy_for_me
 1c358a2f218c0f6459e7fa65ef27124b,hero/lucio/
+34f571fa3ebecfa961cb08208fb04fdc,hero/lucio/
 3580435207c7787bffb4c1a3f7c5b784,hero/lucio/
 51dca8ee702bd2075760335d367dc646,hero/lucio/
 5945e86de753cb5c27d27e22158c564d,hero/lucio/
+6b2047fe0f0c816de2feb8b6d9076259,hero/lucio/
+a7d781403fa72403b0a9f3218e49ad96,hero/lucio/
 d34ebcd55dd3c5c029f0b54ee77fcea0,hero/lucio/
+f44a502885c24923d102b82479b5d07c,hero/lucio/
 69ae5aa70cf8a9cbba7b42be3607abe9,hero/lucio/5_4_3_2_1
 8e5ce744ff26abcbcb5fcbe9a298f020,hero/lucio/all_that_matters_is_what_we_do_here_so_lets_win_this
 5242c9818cb167c5e705a54313db436b,hero/lucio/an_amazing_stop
@@ -830,7 +846,11 @@ e582361abef110a387f4fe2844785eb1,hero/lucio/yeah_lets_move_it_people
 82ea7a3c80b65fbb12da96d342454366,hero/lucio/you_gotta_believe
 c278f751d037245c79bd5864d6962445,hero/lucio/you_remember_that_turret_me_neither
 5614d6f3f4b8e74be6341f7e5b80c01c,hero/m/ccree/
+2311c2e8035103fad8e6e554d823dcd6,hero/mccree/
 3d2fa7b7d349b9deff06a86967d693d1,hero/mccree/
+55b545b6111e4b19908b2ad620ba3085,hero/mccree/
+72e57daab9028ded25870c3febd433f2,hero/mccree/
+80af54afbdd09021eaa10e5e264e4d8e,hero/mccree/
 80d04ffa416df7aab8c908c81abfa847,hero/mccree/acknowledged
 344eaeb04962f0d976136ad431cea2ee,hero/mccree/attack_now_or_we_lose
 64b0cf364d0649b912612d60080b68e5,hero/mccree/back_in_the_saddle_again
@@ -1042,9 +1062,11 @@ d5d5b44f5428c8fb651db5aa303ab261,hero/mei/youre_just_a_no_good_bully_how_can_you
 00a6e8a92f55cbad9d70efa33ad3e479,hero/mercy/
 03c1d67ce3f6d0ee9534b4f0567bc6be,hero/mercy/
 0ada2c195b0685583024ac967ce7983d,hero/mercy/
+23772d39a024b965fb1bc9b0375755db,hero/mercy/
 2d2a7ab072e953d074b33a422c40a15e,hero/mercy/
 38249bb0d321d63723a907459a8a932b,hero/mercy/
 3be6d7137c837996fd931821439e5f83,hero/mercy/
+9d2d33aeba45b88472bcb82374b1bbc1,hero/mercy/
 b6754d0aac1937d9f9a08cc6220573ad,hero/mercy/
 c15b9c3e7299a83ae1007153cfe715fa,hero/mercy/
 c9abbe960c748c553edec8d32f5ac3a7,hero/mercy/
@@ -1150,6 +1172,8 @@ fd1353ac75486666c56ecf84d4bd118c,hero/mercy/youre_ready_to_do_some_damage
 3f650d43a249e1e9f06bd5ec25602008,hero/pharah/
 59808288d1f660c40ab55cade39941c2,hero/pharah/
 6320a2adbb1e54f66110cae9c6b54928,hero/pharah/
+8fd9cf69cbb5da9d0521f361e1c1f417,hero/pharah/
+91899bb8b7ba9c6c835c2e1f5fb289d4,hero/pharah/
 fdea0353ec493691801957c64bb5b14f,hero/pharah/
 a0ba9067d4ecca64c17e64fa54a6248f,hero/pharah/aerial_superiority_achieved
 c8133acabcdb1541e707ee228169761e,hero/pharah/after-action_report_unstoppable
@@ -1204,6 +1228,7 @@ c384177d45dae606eed9d37ba4a66d42,hero/pharah/together_we_will_not_fail
 048e09a67ec8b0a370466c5072ae5c07,hero/pharah/win_here_and_victory_is_ours
 cdb3b366268bb3608a7a02dc5782fbf4,hero/pharah/youre_not_going_anywhere
 74793c77e2ff2fd63fee93fa6fc5962d,hero/reaper/
+a1b2585133a8a7a0879f64be15a27c6e,hero/reaper/
 d0dcf469c52f11e019836967e772b427,hero/reaper/
 d6df027469145c46cee3b0e6cb69d035,hero/reaper/
 4ef6cf57ae30871cce8f9ddb45818353,hero/reaper/and_you_sure_know_how_to_play_boy_scout
@@ -1325,7 +1350,10 @@ d57130d3509e245cf2377c49072486f7,hero/reaper/you_didnt_think_id_forget_about_you
 a97571d40500f9e278905af57cf6ebf7,hero/reaper/you_never_were_a_good_student
 c32971d94349c2d0f41a1cb008a0e735,hero/reaper/your_death_makes_me_stronger
 b68d35746d2f1c9b680e07b383379a80,hero/reaper/youve_got_to_be_kidding_me
+43818588b9872724192809000e9430e3,hero/reinhardt/
 4522c4f2ed7c4b23675065d9bb955987,hero/reinhardt/
+78f0c4ea280263fdbbd2044f246582c0,hero/reinhardt/
+cfebab08d916e22bda61db5251ca378d,hero/reinhardt/
 d02b7a5facf4e12617514a3a21c1732b,hero/reinhardt/
 ef9a143b5231fd496276e603c4f500d7,hero/reinhardt/
 5b3f7d7a579e384b764c99473e876895,hero/reinhardt/5_4_3_2_1
@@ -1542,6 +1570,7 @@ e1608a5e715dbd9b4a146816d8ebd180,hero/roadhog/yeah_laugh
 257ada329eec0d52b5a5d2c381a65423,hero/roadhog/yes
 df55a5630a966c066c696e2fb56d7e28,hero/roadhog/your_in_my_house_get_out
 695b4c599b635a6d5fe4e850cd2ba202,hero/soldier/
+a2e008f10195d7763db7b7853212d898,hero/soldier/
 c2ddc3d94d57eca2d77c20afea0a4030,hero/soldier/
 fd4b453624c073adf624f1f92b22dc7d,hero/soldier/
 e702714eb12c35b9bf7b05e2b38532ff,hero/soldier/age_before_beauty_guess_youre_coming_in_third
@@ -1653,7 +1682,9 @@ c0b6fb93c23d172b20e4e638787ed3fb,hero/soldier/you_dont_wanna_go_to_war_with_me
 2111a708417bb4f07bac58247d61b7e3,hero/symmetra/
 6a5d079e1aa59e6f20a0bbe69fe7401b,hero/symmetra/
 6cb9365d8c89010ee25af6ad5a05fe43,hero/symmetra/
+9a92fd7eb714e54e51f708b8a5c39139,hero/symmetra/
 9cd011c64061897344571e71e2c69c59,hero/symmetra/
+bcb07d74a13b292632c76a16ff4dd428,hero/symmetra/
 21f036771dabebef89896a7f286ee88d,hero/symmetra/a_commendable_effort
 3d34e1aae815fc7f17f11675725cb086,hero/symmetra/a_healer_would_be_optimal
 1b4e2cc213166bfcb26404905c0743a8,hero/symmetra/a_momentary_lapse
@@ -1753,6 +1784,7 @@ a012889077571c7fb80c0afd487f519d,hero/symmetra/you_perform_your_function_admirab
 5a9186560bff2279f3cf68c44a96cc6d,hero/torbjorn/
 63500e62141ed2c8da78cd757ea8ebbf,hero/torbjorn/
 71918fa36da5ec7d39f8800667eede0e,hero/torbjorn/
+878762fafd2c9ed49f90a3bb5de8a3b4,hero/torbjorn/
 9f111f299c2dfe4bab0e2903acd6d07c,hero/torbjorn/
 f0e6b67f561bb8e41220c3c041f91a71,hero/torbjorn/
 8bea1b966708f4db4a46bc80595a1cf0,hero/torbjorn/5_4_3_2_1
@@ -1903,7 +1935,9 @@ c6ec0966d46b3e9d268938a156db3a20,hero/torbjorn/whoops_did_i_leave_that_there
 68f7546cdfd4dcecd208558bb394aa0c,hero/tracer/
 7d83116e0e2526fcb0402fc9b90d9fc7,hero/tracer/
 93471e68b97875138daae0a425613b95,hero/tracer/
+d450723b8f6d2c6ce03841978d71d353,hero/tracer/
 f414240b04dd7ff8a6864882f90f9b9c,hero/tracer/
+faaa44ec955a169c03c57b1b68723a03,hero/tracer/
 b000bb29daccfd7c42edc731f590f671,hero/tracer/ah_payloads_moving
 7fc0f6ca039eece08745bd651c7ac6b3,hero/tracer/alright_everyone_lets_do_this
 7d8a206d6183c8485e6ee6b5b3def458,hero/tracer/and_shes_back_in_the_game
@@ -1996,7 +2030,6 @@ ce52ca13756da4136d4be33f34712fab,hero/tracer/whats_the_hold_up
 01ae45d85f52b120e715752891784077,hero/tracer/whos_next
 7f10d422433a90e6dbfb81d21c06950b,hero/tracer/winning_is_my_game
 905c87f4c134efcac9a2577fbefaa0c1,hero/tracer/winston_youre_an_animal_laugh
-faaa44ec955a169c03c57b1b68723a03,hero/tracer/
 4bf4990edfa7ae80198c3c3dda18d059,hero/tracer/you_got_a_problem_with_that
 c9763f6888acfd8e5b48b0621167794b,hero/tracer/you_got_whats_coming_to_ya
 8df11ff87b53847d1d5307a5979e1ce5,hero/tracer/you_need_a_time_out
@@ -2007,6 +2040,7 @@ c9763f6888acfd8e5b48b0621167794b,hero/tracer/you_got_whats_coming_to_ya
 05b95938bf459010e23d134c744e0f16,hero/widowmaker/
 0611a73746a79b54bca6d08722180378,hero/widowmaker/
 084b1727cf35de7eea12a7960a1ebff3,hero/widowmaker/
+10ad3c4c10cbae87aa1611b1e7fe354e,hero/widowmaker/
 1249d47b2f1c328ce89a010d435c92a7,hero/widowmaker/
 1c51355efde4f69f20ccf444cd511b86,hero/widowmaker/
 20165227aa02404a46f664f764d6e3a8,hero/widowmaker/
@@ -2110,6 +2144,7 @@ dffd16717954f90fd96277935acc890c,hero/widowmaker/
 e51b59bae9ef8a1b9057286f9398cfbd,hero/widowmaker/
 e536e5d6e095c9d907111b425bacdd96,hero/widowmaker/
 e5b0b3dfd998c162d4712bc95499b4c9,hero/widowmaker/
+e5bc4d12595bb3aad00dd62436b77ac7,hero/widowmaker/
 e6c17cd74d4a798c2b8ef53d31e09ed7,hero/widowmaker/
 ec34b75afc4a89928ed6f89076e3f69e,hero/widowmaker/
 edfcb8ed98d46310919ced14a03a7eee,hero/widowmaker/
@@ -2135,6 +2170,7 @@ f347506acf035e69c167eeeaf8916ccd,hero/widowmaker/lets_take_the_point
 242651bcbc883ff40a7197326eda2f16,hero/winston/
 2a07cc23cdc4ee1e68fdd254a98fdf56,hero/winston/
 2dd1811c484c68e69628269cceb4f091,hero/winston/
+30472b9d7d4e470d462dd93e5c107f87,hero/winston/
 32e126138a245f3d58dcbbe4179a9bef,hero/winston/
 3354bb6b9dbfdb2ad60090552350fd5e,hero/winston/
 34a68e1e32a5478f2481c85e61c7a80b,hero/winston/
@@ -2150,6 +2186,7 @@ f347506acf035e69c167eeeaf8916ccd,hero/widowmaker/lets_take_the_point
 57bd4d6f7db5153df312de8cd3471a0e,hero/winston/
 5afe2b08ef01bc27afea20b70710fb24,hero/winston/
 5f1a9fb4d73b45eda5b8865e992f74bb,hero/winston/
+62a3aa8e8faf6d7d17bbdac784ee1b0a,hero/winston/
 69884de0a83d263723554d60991df5dc,hero/winston/
 6ebe2ff4f69d5c9e487e1eca2ce89438,hero/winston/
 792f5be2743626b7fadc2489cdd5994c,hero/winston/
@@ -2404,6 +2441,7 @@ fe14e7c9b51b04d01d59829ae3efc5e9,hero/zarya/
 797eecbd350a8f548b5944588dca1365,hero/zenyatta/
 7cabb56f18d40f61deda153bd426703e,hero/zenyatta/
 821c1bbf686dc5e8be1f28f03dbc1da5,hero/zenyatta/
+826c6418ba0df1753d795ff8e1078183,hero/zenyatta/
 82d018a561bccffaa8150af59ccaae5d,hero/zenyatta/
 8646b67d4537bc53145613b26b57d5da,hero/zenyatta/
 86b3190e29def50b5bef5917224fb78a,hero/zenyatta/
@@ -2463,18 +2501,22 @@ ff6ee1e0e37117106c3a30fc5f359e83,hero/zenyatta/
 ffff2a215fab8befaef78d4b1af29999,hero/zenyatta/
 0368af62ca6767bd91e6e5f4930155d6,hero/zenyatta/eventually_all_become_one_with_the_universe
 04cf0c901b7e2c93b4ca373548bf1080,music/
+0739799b2b281851bfff48eecf416960,music/
 0c7db2c8e99fe67e642e9fa02834d456,music/
 10aa842330f93c75a38d2dd803254d00,music/
+1c93ee82f1248f7cc2c466f106398c05,music/
 1d8137386be47a3f0548d5eb6ac6e049,music/
 24ec660fe331572784f8ddb9ee03f3ec,music/
 255847d5b88d545c50e2cb3aac86acdb,music/
 36d4cef1ab3da098231484643b442e92,music/
 3796ff550d2e776352c6bf7c1ea2b7a3,music/
 3fa0723aa3dcf5f28a913b1a05984979,music/
+3ff79257c15dace1fdeb53bf973ea5c6,music/
 4b26247c542b094ee8afc9c39145278b,music/
 4e0a17197288614bd8057ecd7088708b,music/
 512102068a3ea2015eca8421d58c658a,music/
 51f1a0c5b0af4606189da201a16154a8,music/
+5758f224ead6254a2d2a40141f736e2c,music/
 68dc1c89930c0f75358eb426f7157e0b,music/
 765f86142856ae9bf960e2acf06173c9,music/
 7a1f54336c18b3f92104d8a9b3d18760,music/
@@ -2543,6 +2585,7 @@ d223435f73d86fed4b4a45603e4d3de7,nn/
 1bdac695782da68d3d06f01f6f52653b,special/
 1c9aba8f82ef8bc644a9384bf1d7c93b,special/
 1cbbbf2eb19f42b0d1da302fabcea309,special/
+1d846aa2227e1448f3cbe32e19ff5658,special/
 237f419c88c723ed21ce22f07401dcf0,special/
 245a42df1fe9cd8917e3db21e15ce611,special/
 276d6725eae2b5fb5d6fef61ca153515,special/
@@ -2658,6 +2701,7 @@ a6b6df8b3fc188dd781c340b59ecca63,special/coin_flip
 72dab2dd741a0a5cb3878ebc84a65c0c,summer/
 759ba90b3b8759b1753ffc743572f490,summer/
 75a8f9f731d706d65ac73014ca3f9856,summer/
+76d513cee9e14fd01b6480c723d64157,summer/
 7c0a93b7ca469b6cab26943711ca3bb4,summer/
 7ddac2975d578ee135d633f628e46046,summer/
 7ee5583d990d265521c4697106a9d655,summer/
@@ -2665,6 +2709,7 @@ a6b6df8b3fc188dd781c340b59ecca63,special/coin_flip
 83c82d5465456790c8b9622c57f3e316,summer/
 85fd5b458b217903a44fedccb46bd4de,summer/
 87d35bff1c2e997a48a91fae448b7274,summer/
+8c1eb7ade4ea94e347a8c35077ca9d1e,summer/
 95986b801fb8eae70bcbd6968a44c4a9,summer/
 9b1f325aea1f5fcf33aed16ee20a8319,summer/
 a5d59da2ff262bfe031b9da18aca43cf,summer/
@@ -2673,6 +2718,7 @@ af17a4f361046663d305ca16d9d574bc,summer/
 aff713276424cd28d500f0aa8627638c,summer/
 b035eda8f18792e0b18f764e0687473b,summer/
 b49b49521f1ebee6df59ca66b354ee41,summer/
+bd143e6f8e7c67b4d346165e89cc634e,summer/
 bd77d161c08f18adf3bc8fd73256fa68,summer/
 c157663539134aa58e149171ccb981a1,summer/
 c2539aca3a5b2f56da246f52c18655d3,summer/
