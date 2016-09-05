@@ -133,16 +133,13 @@ try:
         print '%0.2f%%' % (100.0*i/len(dirs))
         dir = dirs[i]
         for file in os.listdir(folder+"/"+dir):
-            # grab all the files
-            if not file.endswith(".xxx"):
-                continue
             path = folder+"/"+dir+"/"+file
             contents = open(path, "r").read()
             # Ignore if first line doesn't contain wave headers
             if "WAVEfmt" not in contents:
                 continue
             # Ignore if file is smaller than the minimum size (default 10k)
-            if os.stat(path).st_size < config.get("default", "min_size"):
+            if os.stat(path).st_size < int(config.get("default", "min_size")):
                 continue
             # calculate hash from original file contents
             hash = md5(contents).hexdigest()
