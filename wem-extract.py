@@ -41,6 +41,7 @@ def play(file):
     # Windows equivalent of unix open, i.e. will start playing
     if os.system(file) != 0:
         raise OSError
+        # Ideally dont have this error print out
 
     try:
         from SendKeys import SendKeys
@@ -213,6 +214,6 @@ with open(config.get("paths", "noise"), "w") as csvfile:
     csvfile.write("\n".join(noises)+"\n")
 
 readme = open("README.md").read().split("\n")
-readme[0] = "[![Progress](https://img.shields.io/badge/Progress-%d%%25-yellow.svg)]()" % (100.0 * lines_transcribed/len(sounds) * i / len(dirs))
+readme[0] = "[![Progress](https://img.shields.io/badge/Progress-%d%%25-yellowgreen.svg)]()" % (100.0 * lines_transcribed/len(sounds) * i / len(dirs))
 with open("README.md", "w") as f:
     f.write("\n".join(readme))
