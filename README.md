@@ -1,4 +1,4 @@
-[![Progress](https://img.shields.io/badge/Progress-71%25-yellowgreen.svg)]()
+[![Progress](https://img.shields.io/badge/Progress-73%25-green.svg)]()
 # Overwatch - Sound export
 This usefool tool + tutorial gets you all the sound files extracted from the overwatch data files.
 
