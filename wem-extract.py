@@ -196,7 +196,7 @@ with open(config.get("paths", "important"), "r") as csvfile:
             except StopIteration:
                 done_transcribing = True
             except OSError:
-                print "Corrupt path removed."
+                print "Corrupt path removed"
                 continue
         sounds.append([path, hash])
 sounds.sort()
