@@ -1,6 +1,8 @@
 [![Progress](https://img.shields.io/badge/Progress-89%25-green.svg)]()
 # Overwatch - Sound export
-This usefool tool + tutorial gets you all the sound files extracted from the overwatch data files.
+This usefool tool will extract all the sound files from Overwatch.
+
+All sound files ©Blizzard 2016. Please do not redistribute them independently!
 
 ## Summary
 1. Download this repository
@@ -17,7 +19,7 @@ This project runs on Python 2.7. 3.x compatibility is planned, but until then pl
 
 ### 2. Download the required tools
 * [CascView](http://www.zezula.net/en/casc/main.html) Extracts the raw sound files from the game
-* [ww2ogg])https://github.com/hcs64/ww2ogg/releases/download/0.24/ww2ogg024.zip) Converts wem (the raw sound file format) to ogg, a lossless audio codec.
+* [ww2ogg](https://github.com/hcs64/ww2ogg/releases/download/0.24/ww2ogg024.zip) Converts wem (the raw sound file format) to ogg, a lossless audio codec.
 * [revorb](http://yirkha.fud.cz/progs/foobar2000/revorb.exe) Fixes some problems after the conversion.
 
 Once downloaded, move these files into this repository's tools folder:
