@@ -1,1 +1,1 @@
-C:\Python27\Python.exe wem-extract.py
+C:\Python27\python.exe wem-extract.py

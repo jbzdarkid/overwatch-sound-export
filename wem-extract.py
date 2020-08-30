@@ -1,6 +1,7 @@
+from __future__ import print_function
 import os # system, stat, path.isfile, remove, listdir, devnull
 import subprocess # call, STDOUT
-from shutil import move
+from shutil import move, copy
 from hashlib import md5
 from csv import reader
 
@@ -15,7 +16,7 @@ else:
 config = configparser.ConfigParser()
 config.read("settings.conf")
 
-print "Overwatch wem extractor v0.4"
+print("Overwatch wem extractor v0.4")
 # get hash storage
 hashStorage = {}
 with open(config.get("paths", "important"), "r") as csvfile:
@@ -41,7 +42,7 @@ def play(file):
     # Windows equivalent of unix open, i.e. will start playing
     if os.system(file) != 0:
         raise OSError
-        # Ideally dont have this error print out
+        # Ideally don't have this error print out
 
     try:
         from SendKeys import SendKeys
@@ -50,7 +51,7 @@ def play(file):
         SendKeys("%{TAB}") # Alt-Tab
     except ImportError:
         pass
-    
+
 def categorize_unknown(hash, file):
     play(file)
     while 1:
@@ -59,12 +60,12 @@ def categorize_unknown(hash, file):
         except KeyboardInterrupt:
             code = "x"
         if code == "?" or code == "":
-            print "n - Categorize as noise"
-            print "r - Re-listen"
-            print "s - Skip"
-            print "? - Print this help"
-            print "x - Exit"
-            print "Any other value - Categorize with value as path"
+            print("n - Categorize as noise")
+            print("r - Re-listen")
+            print("s - Skip")
+            print("? - Print this help")
+            print("x - Exit")
+            print("Any other value - Categorize with value as path")
             continue
         elif code.lower() == "s":
             return
@@ -81,8 +82,57 @@ def categorize_unknown(hash, file):
             hashStorage[hash] = "noise/"
             break
         else:
+            replacements = {
+                'ana': 'hero/ana',
+                'ashe': 'hero/ashe',
+                'baptiste': 'hero/baptiste',
+                'bap': 'hero/baptiste',
+                'bastion': 'hero/bastion',
+                'brigitte': 'hero/brigitte',
+                'brig': 'hero/brigitte',
+                'doomfist': 'hero/doomfist',
+                'doom': 'hero/doomfist',
+                'dva': 'hero/dva',
+                'echo': 'hero/echo',
+                'genji': 'hero/genji',
+                'hammond': 'hero/hammond',
+                'hanzo': 'hero/hanzo',
+                'junkrat': 'hero/junkrat',
+                'junk': 'hero/junkrat',
+                'lucio': 'hero/lucio',
+                'mccree': 'hero/mccree',
+                'mei': 'hero/mei',
+                'mercy': 'hero/mercy',
+                'moira': 'hero/moira',
+                'orisa': 'hero/orisa',
+                'pharah': 'hero/pharah',
+                'reaper': 'hero/reaper',
+                'reinhardt': 'hero/reinhardt',
+                'rein': 'hero/reinhardt',
+                'roadhog': 'hero/roadhog',
+                'hog': 'hero/roadhog',
+                'sigma': 'hero/sigma',
+                'soldier': 'hero/soldier',
+                'sombra': 'hero/sombra',
+                'symmetra': 'hero/symmetra',
+                'sym': 'hero/symmetra',
+                'torbjorn': 'hero/torbjorn',
+                'torb': 'hero/torbjorn',
+                'tracer': 'hero/tracer',
+                'widowmaker': 'hero/widowmaker',
+                'widow': 'hero/widowmaker',
+                'winston': 'hero/winston',
+                'zarya': 'hero/zarya',
+                'zenyatta': 'hero/zenyatta',
+                'zen': 'hero/zenyatta',
+            }
+
+            if code in replacements:
+              code = replacements[code]
+
             if not code.endswith("/"):
                 code = code + "/"
+
             log = open(config.get("paths", "important"), "a")
             log.write(hash + "," + code + "\n")
             log.close()
@@ -98,14 +148,14 @@ def transcribe_file(hash, path):
         except KeyboardInterrupt:
             code = "x"
         if code == "?" or code == "":
-            print "n - Categorize as noise"
-            print "r - Re-listen"
-            print "s - Skip"
-            print "? - Print this help"
-            print "x - Exit"
-            print "Any other value - Transcribe as value"
-            print "Note: If value contains a / then"
-            print "it will override the directory"
+            print("n - Categorize as noise")
+            print("r - Re-listen")
+            print("s - Skip")
+            print("? - Print this help")
+            print("x - Exit")
+            print("Any other value - Transcribe as value")
+            print("Note: If value contains a / then")
+            print("it will override the directory")
             continue
         elif code.lower() == "s":
             return path
@@ -131,7 +181,7 @@ folder = config.get("paths", "casc")
 try:
     dirs = os.listdir(folder)
     for i in xrange(len(dirs)):
-        print '%0.2f%%' % (100.0*i/len(dirs))
+        print('%0.2f%%' % (100.0*i/len(dirs)))
         dir = dirs[i]
         for file in os.listdir(folder+"/"+dir):
             path = folder+"/"+dir+"/"+file
@@ -156,19 +206,19 @@ try:
                 ],
                 stdout=open(os.devnull, "w"),
                 stderr=subprocess.STDOUT)
-            path = path.replace(".xxx", ".ogg")
+            path += '.ogg'
             # If conversion fails, a file won't be created
             if not os.path.isfile(path):
                 continue
             # Use revorb to fix potential problems
             subprocess.call([
-                config.get("paths", "tools")+"revorb.exe", path], 
+                config.get("paths", "tools")+"revorb.exe", path],
                 stdout=open(os.devnull, "w"),
                 stderr=subprocess.STDOUT)
             if hash not in hashStorage: # New file
                 categorize_unknown(hash, path)
             try:
-                move(path, _name(hash))
+                copy(path, _name(hash))
             except IOError:
                 pass
 except StopIteration: # User wants to stop categorizing files
@@ -188,7 +238,7 @@ with open(config.get("paths", "important"), "r") as csvfile:
             pass
         else:
             if path != prev_path:
-                print path # Warn the user that we're in a new dir
+                print(path) # Warn the user that we're in a new dir
                 prev_path = path
             try:
                 path = transcribe_file(hash, path)
@@ -196,7 +246,7 @@ with open(config.get("paths", "important"), "r") as csvfile:
             except StopIteration:
                 done_transcribing = True
             except OSError:
-                print "Corrupt path removed"
+                print("Corrupt path removed")
                 continue
         sounds.append([path, hash])
 sounds.sort()

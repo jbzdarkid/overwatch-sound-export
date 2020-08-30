@@ -12,10 +12,10 @@ All sound files ©Blizzard 2016. Please do not redistribute them independently!
 4. Run Python Script
 
 ### 1. Download this repository
-[Click this](https://github.com/jbzdarkid/overwatch-sound-export/archive/master.zip). Extract the zip file and take not of its location.
+[Click this](https://github.com/jbzdarkid/overwatch-sound-export/archive/master.zip). Extract the zip file and take note of its location.
 
 #### 1a. Install python
-This project runs on Python 2.7. 3.x compatibility is planned, but until then please downlad python [from the official site](https://www.python.org/downloads/).
+This project runs on Python 2.7. 3.x compatibility is planned, but until then please download python [from the official site](https://www.python.org/downloads/).
 
 ### 2. Download the required tools
 * [CascView](http://www.zezula.net/en/casc/main.html) Extracts the raw sound files from the game
@@ -30,7 +30,9 @@ Once downloaded, move these files into this repository's tools folder:
 
 ### 3. Extract CASC (data files)
 * Launch CascView.exe, select Open Storage -> Program Files/Overwatch.
-* Extract the "unknown" folder into this reposoitory's casc folder.  Be sure to hit the checkbox for "Delete the local file and continue extracting"
+* Extract the "CONTENT_KEY" folder into this repository's casc folder.
+  * Skip encrypted files [WIP]
+  * Select the option for "Don't show an error message. Continue extracting."
 
 ### 4. Run Python Script
 * Double-click run_extract.bat.
